@@ -90,10 +90,10 @@ public class GamePanel extends JPanel {
 
     public void clickedSquare(int y, int x){
         if (selected == null){ // no piece selected, select piece if one in square clicked.
-            System.out.println(Handler.board[y][x]);
-            if (Handler.board[y][x].getTeam() == turn){ // ensure clicked piece matches team of turn
-                selected = Handler.board[y][x]; // if match store piece in selected
-                System.out.println(selected);
+            if (Handler.board[y][x] != null) {
+                if (Handler.board[y][x].getTeam() == turn) { // ensure clicked piece matches team of turn
+                    selected = Handler.board[y][x]; // if match store piece in selected
+                }
             }
         } else if (selected.getx() == x && selected.gety() == y) { // clicked on selected piece
             selected = null; // deselect it
@@ -103,6 +103,7 @@ public class GamePanel extends JPanel {
                 // valid, move piece and change turn
                 System.out.println("valid Line true");
                 handler.movePiece(selected, x, y);
+                selected = null; // set selected to null
                 repaint();
                 if (turn == 1) {
                     turn = 2;

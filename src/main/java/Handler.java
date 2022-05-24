@@ -8,14 +8,6 @@ public class Handler {
     public static Piece[][] board = new Piece[8][8]; // 8 x 8 corresponds to chess board
 
 
-    /*public void initializeBoard() { // fill array with empty so array will exist
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                board[i][j] = new Piece(i, j, 0, 0);
-            }
-        }
-    }*/
-
     public static void loadBoard(){ // eventually call with array of piece and locations to allow variants/puzzles
 
         // an array with starting pieces
