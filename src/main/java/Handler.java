@@ -8,15 +8,15 @@ public class Handler {
     public static Piece[][] board = new Piece[8][8]; // 8 x 8 corresponds to chess board
 
 
-    public void initializeBoard() { // fill array with empty so array will exist
+    /*public void initializeBoard() { // fill array with empty so array will exist
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 board[i][j] = new Piece(i, j, 0, 0);
             }
         }
-    }
+    }*/
 
-    public void loadBoard(){ // eventually call with array of piece and locations to allow variants/puzzles
+    public static void loadBoard(){ // eventually call with array of piece and locations to allow variants/puzzles
 
         // an array with starting pieces
         Piece[] piecesStart = new Piece[32];
@@ -53,23 +53,48 @@ public class Handler {
         piecesStart[30] = new Piece(7, 6, 1, 2);
         piecesStart[31] = new Piece(7, 7, 1, 4);
 
-        for (int i = 0; i < 32; i++){ // loop will load board
-            board[piecesStart[i].gety()][piecesStart[i].getx()] = piecesStart[i];
+        for (Piece piece : piecesStart){ // loop will load board
+            addPiece(piece);
+        }
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                System.out.println(board[i][j]);
+            }
         }
     }
 
 
 
-    public void addPiece(Piece object, int i, int j){
-        board[i][j] = object;
+    public static void addPiece(Piece piece){
+        board[piece.gety()][piece.getx()] = piece;
     }
 
-    public void removeObject(int i, int j){
-        board[i][j] = new Piece(i, j, 0, 0);
+    public static void removePiece(Piece piece){
+        board[piece.gety()][piece.getx()] = null;
     }
 
-    public void movePiece(){
+    public static void movePiece(Piece piece, int x, int y){
+        removePiece(piece);
+        piece.setx(x);
+        piece.sety(y);
+        addPiece(piece);
+        System.out.println("piece moved");
+    }
 
+    public boolean kingsAlive(){
+        boolean blackKing = false;
+        boolean whiteKing = false;
+        for (Piece[] row : board){
+            for (Piece piece : row){
+                if (piece.team == 1 && piece.type == 6){
+                    whiteKing = true;
+                }
+                if (piece.team == 2 && piece.type == 6){
+                    blackKing = true;
+                }
+            }
+        }
+        return whiteKing && blackKing;
     }
 }
 

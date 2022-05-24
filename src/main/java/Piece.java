@@ -14,10 +14,9 @@ public class Piece {
     * 1 = pawn
     * 2 = knight
     * 3 = bishop
-    * 4 = knight
-    * 5 = rook
-    * 6 = queen
-    * 7 = king
+    * 4 = rook
+    * 5 = queen
+    * 6 = king
     */
     public BufferedImage pieceImage;
 
@@ -30,9 +29,37 @@ public class Piece {
 
     public void getPieceImage(){
         try {
-            if (type == 1)  /// if statement not working - white not printing - intend image load in if statement
-                System.out.println("pawn");
-                pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("pawn.png")));
+            // use type to add piece image
+            if (team == 1) {
+                if (type == 1) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("whitePawn.png")));
+                } else if (type == 2) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("WhiteHorse.png")));
+                } else if (type == 3) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("WhiteBishop.png")));
+                } else if (type == 4) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("WhiteRook.png")));
+                } else if (type == 5) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("whitePawn.png")));
+                } else if (type == 6) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("whitePawn.png")));
+                }
+            }
+            if (team == 2) {
+                if (type == 1) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("blackPawn2.png")));
+                } else if (type == 2) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("BlackHorse.png")));
+                } else if (type == 3) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("blackBishop.png")));
+                } else if (type == 4) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("BlackRook.png")));
+                } else if (type == 5) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("blackQueen.png")));
+                } else if (type == 6) {
+                    pieceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("blackKing.png")));
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,6 +89,7 @@ public class Piece {
     public int getType(){
         return type;
     }
+    public int getTeam() { return team; }
 
     @Override
     public String toString() {
